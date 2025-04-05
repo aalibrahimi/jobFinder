@@ -1,8 +1,11 @@
+"use client";
 import React from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import GradientText from "./GradientText";
+import { Code } from "lucide-react";
+import { motion } from "motion/react";
 
 interface FooterLink {
   name: string;
@@ -46,46 +49,31 @@ export function Footer(): React.ReactElement {
 
   return (
     <footer className="border-t border-gray-200 dark:border-gray-800 bg-amber-100 text-black dark:bg-[#000000] dark:text-white mt-auto">
-      <div className="container mx-auto py-10 text-center px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 text-center">
-          <div className="flex flex-col items-center">
-            <Link href="/" draggable={false} className="flex items-center space-x-2 justify-center">
-              <Image src="/logoPlaceholder.png" alt="Logo" draggable={false} height={45} width={45} />
-            </Link>
-            <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-              {t('compDesc')}
-            </p>
+      
+      <motion.footer
+        className="w-full border-t bg-background py-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+      >
+        <div className="container flex flex-col items-center justify-between gap-4 md:flex-row px-4 md:px-6">
+          <div className="flex items-center gap-2 font-semibold">
+            <Code className="h-5 w-5" />
+            <span>DevJobs</span>
           </div>
-
-          {footerLinks.map((group, i) => (
-            <div key={i} className="space-y-4 flex flex-col items-center">
-              <h3 className="text-sm font-medium">{group.title}</h3>
-              <ul className="space-y-2">
-                {group.links.map((link, j) => (
-                  <li key={j} className="text-center">
-                    <Link
-                      href={link.href}
-                      className="text-sm text-gray-600 dark:text-gray-400 transition-colors hover:text-black dark:hover:text-white"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 border-t border-gray-200 dark:border-gray-800 pt-6">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:justify-center">
-            <p className="text-center text-sm text-gray-600 dark:text-gray-400">
-              © {new Date().getFullYear()} {t('rights')}
-            </p>
-            <div className="flex items-center space-x-4">
-              <Link href="https://github.com/CodeWithAli-Co" draggable={false} target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
-                {t('customLink')}
-              </Link>
-            </div>
+          <p className="text-center text-sm text-muted-foreground md:text-left">
+            &copy; {new Date().getFullYear()} DevJobs. All rights reserved.
+          </p>
+          <div className="flex gap-4">
+            <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+              Terms
+            </Link>
+            <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+              Privacy
+            </Link>
+            <Link href="#" className="text-sm text-muted-foreground hover:underline underline-offset-4">
+              Contact
+            </Link>
           </div>
           <div className="mt-4 flex flex-row items-center justify-center gap-2">
             {/* CodeWithAli Branding - Same Line */}
@@ -114,8 +102,24 @@ export function Footer(): React.ReactElement {
               </Link>
             </p>
           </div>
+          <div className="mt-10 border-t border-gray-200 dark:border-gray-800 pt-6">
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:justify-center">
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+              © {new Date().getFullYear()} {t('rights')}
+            </p>
+            <div className="flex items-center space-x-4">
+              <Link href="https://github.com/CodeWithAli-Co" draggable={false} target="_blank" className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+                {t('customLink')}
+              </Link>
+            </div>
+          </div>
+          
         </div>
-      </div>
+     
+        </div>
+      </motion.footer>
+
+    
     </footer>
   );
 }
