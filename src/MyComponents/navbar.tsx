@@ -1,13 +1,14 @@
 // src/components/Navbar.tsx
 "use client"
 import React, { useEffect, useState } from "react";
-import {Link, usePathname} from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/modetoggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Menu, X, Globe } from "lucide-react"; // Import icons for menu toggle and language
+import { BriefcaseBusiness, Menu, X, Globe, LogIn } from "lucide-react"; // Added LogIn icon
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -25,58 +26,59 @@ export function Navbar(): React.ReactElement {
   const defaultRoute = { href: "/" }
   const t = useTranslations('NavBar');
 
+  // Updated routes for a job board
   const routes: RouteItem[] = [
     {
-      title: t('routes.home'),
+      title: "Home",
       href: "/",
     },
     {
-      title: t('routes.about'),
-      href: "/about",
+      title: "Find Jobs",
+      href: "/jobs",
     },
     {
-      title: t('routes.features.title'),
+      title: "For Employers",
       content: [
         {
-          title: t('routes.features.content.1.title'),
-          href: "/features/1",
-          description: t('routes.features.content.1.desc'),
+          title: "Post a Job",
+          href: "/post-job",
+          description: "Reach thousands of qualified candidates with your job posting.",
         },
         {
-          title: t('routes.features.content.2.title'),
-          href: "/features/2",
-          description: t('routes.features.content.2.desc'),
+          title: "Pricing",
+          href: "/pricing",
+          description: "View our simple and transparent pricing options.",
         },
         {
-          title: t('routes.features.content.3.title'),
-          href: "/features/3",
-          description: t('routes.features.content.3.desc'),
+          title: "Success Stories",
+          href: "/testimonials",
+          description: "See how employers are finding great talent on our platform.",
         },
       ],
     },
     {
-      title: t('routes.resources.title'),
+      title: "Resources",
       content: [
         {
-          title: t('routes.resources.content.1.title'),
-          href: "/docs",
-          description: t('routes.resources.content.1.desc'),
-        },
-        {
-          title: t('routes.resources.content.2.title'),
+          title: "Career Advice",
           href: "/blog",
-          description: t('routes.resources.content.2.desc'),
+          description: "Tips and guidance for your job search and career advancement.",
         },
         {
-          title: t('routes.resources.content.3.title'),
+          title: "Resume Builder",
+          href: "/resume-builder",
+          description: "Create a professional resume that stands out to employers.",
+        },
+        {
+          title: "Help Center",
           href: "/help",
-          description: t('routes.resources.content.3.desc'),
+          description: "Find answers to your questions and get support.",
         },
       ],
     },
     {
-      title: t('routes.contact'),
-      href: "/contact",
+      title: "About Us",
+      href: "/about",
     },
   ];
 
@@ -98,6 +100,7 @@ export function Navbar(): React.ReactElement {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState<Language>(languages[0]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track if user is logged in
   
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prev => !prev);
@@ -112,21 +115,28 @@ export function Navbar(): React.ReactElement {
   useEffect(() => {
     const matchedLanguage = languages.find(lang => lang.code === locale) || languages[0];
     setCurrentLanguage(matchedLanguage);
+    
+    // Example: Check if user is authenticated (could be replaced with your auth logic)
+    const userToken = localStorage.getItem('userToken');
+    setIsAuthenticated(!!userToken);
   }, [locale]);
 
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-amber-100 text-black dark:bg-[#000000] dark:text-white">
+    <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white text-black dark:bg-gray-950 dark:text-white shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Left section: Logo and mobile menu toggle */}
         <div className="flex items-center gap-4">
           <Link href="/" draggable={false} className="flex items-center space-x-2">
-            <Image src="/logoPlaceholder.png" alt="Logo" draggable={false} height={45} width={45} />
+            <div className="flex items-center">
+              <BriefcaseBusiness className="h-8 w-8 text-blue-600" />
+              <span className="ml-2 font-bold text-xl">DevJobs</span>
+            </div>
           </Link>
           
           {/* Mobile menu toggle button */}
           <button 
-            className="md:hidden p-2 rounded-md hover:bg-amber-600 dark:hover:bg-gray-800 transition-colors"
+            className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             onClick={toggleMobileMenu}
             aria-label="Toggle mobile menu"
           >
@@ -146,11 +156,11 @@ export function Navbar(): React.ReactElement {
                 if (route.content) {
                   return (
                     <NavigationMenuItem key={index}>
-                      <NavigationMenuTrigger className="bg-amber-100 text-black dark:bg-[#000000] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out">
+                      <NavigationMenuTrigger className="bg-white text-black dark:bg-gray-950 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 ease-in-out">
                         {route.title}
                       </NavigationMenuTrigger>
-                      <NavigationMenuContent className="bg-amber-50 text-black dark:bg-[#000000] dark:text-white transition-transform duration-300">
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] text-center">
+                      <NavigationMenuContent className="bg-white text-black dark:bg-gray-950 dark:text-white transition-transform duration-300">
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {route.content.map((item, i) => (
                             <ListItem
                               key={i}
@@ -180,8 +190,20 @@ export function Navbar(): React.ReactElement {
           </NavigationMenu>
         </div>
         
-        {/* Right section: Language switcher, Mode toggle and Avatar with dropdown */}
-        <div className="flex items-center justify-end gap-4 pr-4">
+        {/* Right section: Auth buttons, Language switcher, Mode toggle and Avatar */}
+        <div className="flex items-center justify-end gap-3">
+          {/* Sign in / Sign up buttons (desktop) */}
+          {!isAuthenticated && (
+            <div className="hidden md:flex items-center gap-3">
+              <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
+                Log in
+              </Link>
+              <Button asChild className="bg-blue-600 hover:bg-blue-700">
+                <Link href="/signup">Sign up</Link>
+              </Button>
+            </div>
+          )}
+          
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -212,25 +234,37 @@ export function Navbar(): React.ReactElement {
           
           <ModeToggle />
           
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar className="cursor-pointer">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
-                  N/A
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white dark:bg-gray-950 text-black dark:text-white">
-              <DropdownMenuLabel>{t('dropdown.title')}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">{t('dropdown.item1')}</DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">{t('dropdown.item2')}</DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer">{t('dropdown.item3')}</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">{t('dropdown.logout')}</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {/* Only show avatar if authenticated */}
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src="" alt="User" />
+                  <AvatarFallback className="bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-200">
+                    JD
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-white dark:bg-gray-950 text-black dark:text-white">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">My Applications</DropdownMenuItem>
+                <DropdownMenuItem className="cursor-pointer">Saved Jobs</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="cursor-pointer text-red-500 hover:text-red-700">
+                  Log out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            // Small login button (mobile only)
+            <Button variant="ghost" size="icon" className="md:hidden" asChild>
+              <Link href="/login">
+                <LogIn className="h-5 w-5" />
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
       
@@ -243,10 +277,27 @@ export function Navbar(): React.ReactElement {
         } overflow-hidden`}
       >
         <nav className="px-4 py-4 space-y-1">
+          {/* Add Sign Up button to mobile menu */}
+          {!isAuthenticated && (
+            <div className="py-3 flex flex-col gap-2">
+              <Button asChild className="w-full bg-blue-600 hover:bg-blue-700">
+                <Link href="/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                  Sign up
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="w-full">
+                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                  Log in
+                </Link>
+              </Button>
+              <div className="my-2 border-t border-gray-200 dark:border-gray-800"></div>
+            </div>
+          )}
+
           {/* Language Selector - Mobile View */}
           <div className="py-2">
             <p className="px-3 text-sm font-medium text-gray-500 dark:text-gray-400">{t('labelLang')}</p>
-            <div className="mt-1 grid grid-cols-2 gap-1">
+            <div className="mt-1 grid grid-cols-3 gap-1">
               {languages.map((language) => (
                 <button
                   key={language.code}
@@ -266,6 +317,8 @@ export function Navbar(): React.ReactElement {
             </div>
             <div className="my-2 border-t border-gray-200 dark:border-gray-800"></div>
           </div>
+
+          {/* Navigation Links */}
           {routes.map((route, index) => {
             if (route.content) {
               return (
@@ -307,6 +360,47 @@ export function Navbar(): React.ReactElement {
               </Link>
             );
           })}
+
+          {/* If authenticated, show these options in mobile menu */}
+          {isAuthenticated && (
+            <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-800">
+              <p className="px-3 text-sm font-medium text-gray-500 dark:text-gray-400">My Account</p>
+              <div className="mt-1 space-y-1">
+                <Link 
+                  href="/profile"
+                  className="block py-2 px-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Profile
+                </Link>
+                <Link 
+                  href="/applications"
+                  className="block py-2 px-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  My Applications
+                </Link>
+                <Link 
+                  href="/saved-jobs"
+                  className="block py-2 px-3 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Saved Jobs
+                </Link>
+                <button
+                  className="w-full text-left py-2 px-3 text-sm text-red-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors"
+                  onClick={() => {
+                    // Add logout logic here
+                    localStorage.removeItem('userToken');
+                    setIsAuthenticated(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  Log out
+                </button>
+              </div>
+            </div>
+          )}
         </nav>
       </div>
     </header>
@@ -323,13 +417,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors duration-300 hover:bg-gray-100 hover:text-black dark:hover:bg-gray-800 dark:hover:text-white text-center",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors duration-300 hover:bg-gray-100 hover:text-black dark:hover:bg-gray-800 dark:hover:text-white",
             className
           )}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-gray-600 dark:text-gray-400 text-center">
+          <p className="line-clamp-2 text-sm leading-snug text-gray-600 dark:text-gray-400">
             {children}
           </p>
         </a>
