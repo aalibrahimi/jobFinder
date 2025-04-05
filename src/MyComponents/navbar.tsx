@@ -2,16 +2,14 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import { Link, usePathname } from '@/i18n/navigation';
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "@/components/ui/modetoggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { BriefcaseBusiness, Menu, X, Globe, LogIn, Code } from "lucide-react"; // Added LogIn icon
+import { Code } from "lucide-react"; // Added LogIn icon
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { NavigationMenuLink } from "@/components/ui/navigation-menu";
 
 interface RouteItem {
   title: string;
