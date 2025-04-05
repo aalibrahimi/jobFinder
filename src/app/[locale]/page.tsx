@@ -72,10 +72,10 @@ export default function ImprovedHomePage() {
                   <p className="text-sm text-gray-500 mb-3">Popular searches:</p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="outline" className="bg-blue-50 hover:bg-blue-100 text-blue-800 border-blue-200">
-                      React
+                      Front-End
                     </Badge>
                     <Badge variant="outline" className="bg-blue-50 hover:bg-blue-100 text-blue-800 border-blue-200">
-                      TypeScript
+                      Back-end
                     </Badge>
                     <Badge variant="outline" className="bg-blue-50 hover:bg-blue-100 text-blue-800 border-blue-200">
                       Remote
