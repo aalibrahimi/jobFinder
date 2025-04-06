@@ -66,190 +66,192 @@ export default function Home() {
      
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <Tabs defaultValue="companies" className="mb-12" onValueChange={setActiveTab}>
-              <div className="flex justify-center mb-8">
+          <div className="">
+            <Tabs defaultValue="companies" className="mb-12 grid grid-cols-2 px-5 md:px-0 justify-center items-center" onValueChange={setActiveTab}>
+              <div className="flex justify-center mb-8 col-span-2">
                 <TabsList className="grid w-full max-w-md grid-cols-2">
                   <TabsTrigger value="companies">For Companies</TabsTrigger>
                   <TabsTrigger value="developers">For Developers</TabsTrigger>
                 </TabsList>
               </div>
 
-              <TabsContent value="companies">
-                <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-                  <motion.div
-                    className="flex flex-col justify-center space-y-4"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeIn}
-                  >
-                    <div className="space-y-2">
-                      <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                        Connect with top developer talent
-                      </h1>
-                      <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                        Post your job listings and reach thousands of qualified developers. Find the perfect match for
-                        your team.
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button size="lg" className="gap-1.5">
-                          Post a Job <ArrowRight className="h-4 w-4" />
-                        </Button>
-                      </motion.div>
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button size="lg" variant="outline">
-                          Learn More
-                        </Button>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                  <motion.div
-                    className="flex items-center justify-center"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-background p-6 shadow-lg">
-                      <div className="space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-xl font-bold">Find the perfect developer</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Post your job and start receiving applications from qualified candidates.
-                          </p>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="relative">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <input
-                              type="text"
-                              placeholder="Job title or keyword"
-                              className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            />
-                          </div>
-                          <div className="relative">
-                            <Users className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <select className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                              <option value="">Select experience level</option>
-                              <option value="junior">Junior (1-2 years)</option>
-                              <option value="mid">Mid-level (3-5 years)</option>
-                              <option value="senior">Senior (5+ years)</option>
-                            </select>
-                          </div>
-                          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                            <Button className="w-full">Search Developers</Button>
-                          </motion.div>
-                        </div>
+              <div className="col-span-2 px-5 lg:px-20 2xl:px-75">
+                <TabsContent value="companies">
+                  <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+                    <motion.div
+                      className="flex flex-col justify-center space-y-4"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeIn}
+                    >
+                      <div className="space-y-2">
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                          Connect with top developer talent
+                        </h1>
+                        <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                          Post your job listings and reach thousands of qualified developers. Find the perfect match for
+                          your team.
+                        </p>
                       </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="developers">
-                <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-                  <motion.div
-                    className="flex flex-col justify-center space-y-4"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeIn}
-                  >
-                    <div className="space-y-2">
-                      <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                        Find your dream developer job
-                      </h1>
-                      <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                        Browse thousands of developer opportunities from top companies. Take the next step in your
-                        career.
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button size="lg" className="gap-1.5">
-                          Browse Jobs <ArrowRight className="h-4 w-4" />
-                        </Button>
-                      </motion.div>
-                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Dialog>
-                          <DialogTrigger asChild>
-                            <Button size="lg" variant="outline">
-                              Upload Resume
-                            </Button>
-                          </DialogTrigger>
-                          <DialogContent>
-                            <DialogHeader>
-                              <DialogTitle>Upload your resume</DialogTitle>
-                              <DialogDescription>
-                                Upload your resume to apply for jobs with a single click.
-                              </DialogDescription>
-                            </DialogHeader>
-                            <div className="grid gap-4 py-4">
-                              <div className="grid gap-2">
-                                <Label htmlFor="name">Full Name</Label>
-                                <Input id="name" placeholder="John Doe" />
-                              </div>
-                              <div className="grid gap-2">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="johndoe@example.com" />
-                              </div>
-                              <div className="grid gap-2">
-                                <Label htmlFor="resume">Resume</Label>
-                                <Input id="resume" type="file" />
-                              </div>
+                      <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button size="lg" className="gap-1.5">
+                            Post a Job <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button size="lg" variant="outline">
+                            Learn More
+                          </Button>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      className="flex items-center justify-center"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.2 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-background p-6 shadow-lg">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <h3 className="text-xl font-bold">Find the perfect developer</h3>
+                            <p className="text-sm text-muted-foreground">
+                              Post your job and start receiving applications from qualified candidates.
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="relative">
+                              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                              <input
+                                type="text"
+                                placeholder="Job title or keyword"
+                                className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              />
                             </div>
-                            <Button type="submit" className="w-full">
-                              Submit
-                            </Button>
-                          </DialogContent>
-                        </Dialog>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                  <motion.div
-                    className="flex items-center justify-center"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-background p-6 shadow-lg">
-                      <div className="space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-xl font-bold">Find your next role</h3>
-                          <p className="text-sm text-muted-foreground">
-                            Search for jobs that match your skills and experience.
-                          </p>
-                        </div>
-                        <div className="space-y-2">
-                          <div className="relative">
-                            <Briefcase className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <input
-                              type="text"
-                              placeholder="Job title or keyword"
-                              className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            />
+                            <div className="relative">
+                              <Users className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                              <select className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                                <option value="">Select experience level</option>
+                                <option value="junior">Junior (1-2 years)</option>
+                                <option value="mid">Mid-level (3-5 years)</option>
+                                <option value="senior">Senior (5+ years)</option>
+                              </select>
+                            </div>
+                            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                              <Button className="w-full">Search Developers</Button>
+                            </motion.div>
                           </div>
-                          <div className="relative">
-                            <Building className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                            <input
-                              type="text"
-                              placeholder="Location or Remote"
-                              className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                            />
-                          </div>
-                          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                            <Button className="w-full">Find Jobs</Button>
-                          </motion.div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                </div>
-              </TabsContent>
+                    </motion.div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="developers">
+                  <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+                    <motion.div
+                      className="flex flex-col justify-center space-y-4"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeIn}
+                    >
+                      <div className="space-y-2">
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                          Find your dream developer job
+                        </h1>
+                        <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                          Browse thousands of developer opportunities from top companies. Take the next step in your
+                          career.
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Button size="lg" className="gap-1.5">
+                            Browse Jobs <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Button size="lg" variant="outline">
+                                Upload Resume
+                              </Button>
+                            </DialogTrigger>
+                            <DialogContent>
+                              <DialogHeader>
+                                <DialogTitle>Upload your resume</DialogTitle>
+                                <DialogDescription>
+                                  Upload your resume to apply for jobs with a single click.
+                                </DialogDescription>
+                              </DialogHeader>
+                              <div className="grid gap-4 py-4">
+                                <div className="grid gap-2">
+                                  <Label htmlFor="name">Full Name</Label>
+                                  <Input id="name" placeholder="John Doe" />
+                                </div>
+                                <div className="grid gap-2">
+                                  <Label htmlFor="email">Email</Label>
+                                  <Input id="email" type="email" placeholder="johndoe@example.com" />
+                                </div>
+                                <div className="grid gap-2">
+                                  <Label htmlFor="resume">Resume</Label>
+                                  <Input id="resume" type="file" />
+                                </div>
+                              </div>
+                              <Button type="submit" className="w-full">
+                                Submit
+                              </Button>
+                            </DialogContent>
+                          </Dialog>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      className="flex items-center justify-center"
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.7, delay: 0.2 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="relative w-full max-w-sm overflow-hidden rounded-xl border bg-background p-6 shadow-lg">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <h3 className="text-xl font-bold">Find your next role</h3>
+                            <p className="text-sm text-muted-foreground">
+                              Search for jobs that match your skills and experience.
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <div className="relative">
+                              <Briefcase className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                              <input
+                                type="text"
+                                placeholder="Job title or keyword"
+                                className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              />
+                            </div>
+                            <div className="relative">
+                              <Building className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                              <input
+                                type="text"
+                                placeholder="Location or Remote"
+                                className="w-full rounded-md border border-input bg-background py-2 pl-8 pr-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              />
+                            </div>
+                            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                              <Button className="w-full">Find Jobs</Button>
+                            </motion.div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </TabsContent>
+              </div>
             </Tabs>
           </div>
         </section>
@@ -262,7 +264,7 @@ export default function Home() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <div className="container px-4 md:px-6">
+            <div className="px-4 md:px-6">
               <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
                 <motion.div variants={fadeIn} className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Featured Job Opportunities</h2>
@@ -271,13 +273,13 @@ export default function Home() {
                   </p>
                 </motion.div>
               </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 justify-items-center md:grid-cols-2 lg:grid-cols-3">
                 {featuredJobs.map((job) => (
                   <motion.div
                     key={job.id}
                     variants={fadeIn}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="flex flex-col rounded-lg border bg-background p-6 shadow-sm"
+                    className="flex flex-col md:min-w-[400px] 2xl:min-w-[700px] max-w-[700px] rounded-lg border bg-background p-6 shadow-sm"
                   >
                     <div className="flex justify-between items-start mb-4">
                       <div>
@@ -335,7 +337,7 @@ export default function Home() {
           variants={staggerContainer}
           style={{ display: activeTab === "developers" ? "none" : "block" }}
         >
-          <div className="container px-4 md:px-6">
+          <div className="px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <motion.div variants={fadeIn} className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Why companies choose DevJobs</h2>
@@ -344,10 +346,10 @@ export default function Home() {
                 </p>
               </motion.div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3">
+            <div className="grid w-full gap-4 md:gap-5 2xl:gap-0 items-center py-12 lg:grid-cols-3">
               <motion.div
                 variants={fadeIn}
-                className="flex flex-col items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
+                className="flex flex-col justify-self-center md:min-w-[400px] 2xl:min-w-[500px] max-w-[700px] items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                   <Users className="h-6 w-6 text-primary" />
@@ -359,7 +361,7 @@ export default function Home() {
               </motion.div>
               <motion.div
                 variants={fadeIn}
-                className="flex flex-col items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
+                className="flex flex-col justify-self-center md:min-w-[400px] 2xl:min-w-[500px] max-w-[700px] items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                   <BriefcaseBusiness className="h-6 w-6 text-primary" />
@@ -371,7 +373,7 @@ export default function Home() {
               </motion.div>
               <motion.div
                 variants={fadeIn}
-                className="flex flex-col items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
+                className="flex flex-col justify-self-center md:min-w-[400px] 2xl:min-w-[500px] max-w-[700px] items-center space-y-2 border rounded-lg p-6 bg-background shadow-sm"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
                   <DollarSign className="h-6 w-6 text-primary" />
@@ -392,8 +394,8 @@ export default function Home() {
           viewport={{ once: true }}
           variants={fadeIn}
         >
-          <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
-            <div className="space-y-2">
+          <div className="grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10 2xl:grid-cols-1">
+            <div className="space-y-2 2xl:flex 2xl:flex-col 2xl:justify-center 2xl:items-center">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
                 {activeTab === "developers" ? "Ready to find your dream job?" : "Ready to find your next developer?"}
               </h2>
@@ -403,7 +405,7 @@ export default function Home() {
                   : "Post your job listing today and start receiving applications from qualified candidates."}
               </p>
             </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end">
+            <div className="flex flex-col gap-2 min-[400px]:flex-row lg:justify-end 2xl:justify-center">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button size="lg" className="gap-1.5">
                   {activeTab === "developers" ? "Create Profile" : "Post a Job"} <ArrowRight className="h-4 w-4" />
